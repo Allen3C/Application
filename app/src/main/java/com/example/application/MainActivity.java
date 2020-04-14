@@ -35,12 +35,10 @@ public class MainActivity extends BaseActivity {
 
     private boolean isChangeTopOrBottom;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);使用了注解
-        changeAnima(rgMainBottom, rgMainTop);
 
+    @Override
+    public void afterBindView() {
+        changeAnima(rgMainBottom, rgMainTop);
 
     }
 
