@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+//抽象中介者  接口
 //包括Activity和Fragment生命周期的方法，Fragment后边讲
 public interface ILifeCircle {
     //Bundle可以先不用了解

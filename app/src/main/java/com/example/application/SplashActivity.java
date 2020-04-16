@@ -20,16 +20,18 @@ public class SplashActivity extends BaseActivity implements ISplashActivityContr
 
     private ISplashActivityContract.IPresenter timerPresenter;
 
+    //模板方法设计模式
     @Override
     public void afterBindView() {
 
+        //大函数拆分，把不同功能的代码抽离到不同的函数中
         initListener();
         initVideo();
         initTimerPresenter();
     }
 
     private void initTimerPresenter() {
-        //持有P层强引用
+        //会执行SplashTimerPresenter的构造方法，进而继承LifeCircleMvpPresenter的构造方法来实现生命周期的关联
         timerPresenter = new SplashTimerPresenter(this);
         timerPresenter.initTimer();
     }

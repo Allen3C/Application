@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+//代理类   代理LifeCircleMvpPresenter  代理p层生命周期
 public class MvpControler implements ILifeCircle{
     //存放的是P层的实例
     //用set是因为可以对应多个p层
