@@ -1,18 +1,22 @@
-package com.example.application;
+package com.example.application.splash;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.application.base.BaseActivity;
+import com.example.application.main.MainActivity;
+import com.example.application.R;
+import com.example.application.base.ViewInject;
 
 import java.io.File;
 
 import butterknife.BindView;
 
 @ViewInject(mainlayoutid = R.layout.activity_splash)
-public class SplashActivity extends BaseActivity implements ISplashActivityContract.Iview{
+public class SplashActivity extends BaseActivity implements ISplashActivityContract.Iview {
     @BindView(R.id.vv_play)
     FullScreeVideoView vvPlay;
     @BindView(R.id.tv_splash_timer)

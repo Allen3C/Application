@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.splash;
 
 import com.example.application.mvp.ILifeCircle;
 import com.example.application.mvp.IMvpView;
@@ -9,10 +9,13 @@ import com.example.application.mvp.MvpControler;
 // 因为每个的功能（如 void settvSplashTimer(String timer);）不同，不能把所有的功能都写到IMvpView中
 public interface ISplashActivityContract {
     interface Iview extends IMvpView{
+        //在SplashActivity里具体实现，供SplashTimerPresenter调用
         void settvSplashTimer(String timer);
 
     }
     interface IPresenter extends ILifeCircle{
+        //在SplashTimerPresenter里实现，供SplashActivity调用
+        //这就实现了SplashTimerPresenter和SplashActivity交互，互相调用方法
         void initTimer();
 
     }
