@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/item_shanghai_iv"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/shanghai"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"/>
+
+    <TextView
+        android:id="@+id/item_shanghai_tv"
+        android:background="@color/color_ADADAD"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/color_ffffffff"
+        android:text="上海"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"/>
+
+</LinearLayout>
