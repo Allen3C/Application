@@ -1,8 +1,8 @@
 package com.example.application.splash;
 
-import com.example.application.mvp.ILifeCircle;
-import com.example.application.mvp.IMvpView;
-import com.example.application.mvp.MvpControler;
+import com.example.mvp.mvp.ILifeCircle;
+import com.example.mvp.mvp.IMvpView;
+import com.example.mvp.mvp.MvpControler;
 
 //作用是SplashActivity和SplashTimerPresenter互相拿到引用（不再是强引用，改成了弱引用）
 //为了扩展性更好，以后每一对v和p都会有一个contract类，

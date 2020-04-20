@@ -1,8 +1,8 @@
-package com.example.application.mvp.presenter;
+package com.example.mvp.mvp.presenter;
 
-import com.example.application.mvp.ILifeCircle;
-import com.example.application.mvp.IMvpView;
-import com.example.application.mvp.MvpControler;
+import com.example.mvp.mvp.ILifeCircle;
+import com.example.mvp.mvp.IMvpView;
+import com.example.mvp.mvp.MvpControler;
 
 import java.lang.ref.WeakReference;
 

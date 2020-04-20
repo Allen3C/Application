@@ -1,2 +1,4 @@
 rootProject.name='Application'
 include ':app'
+include ':mvp'
+include ':okhttp'

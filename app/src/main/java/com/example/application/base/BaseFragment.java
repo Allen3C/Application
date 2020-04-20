@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.application.mvp.view.LifeCircleMvpActivity;
-import com.example.application.mvp.view.LifeCircleMvpFragment;
+import com.example.mvp.mvp.view.LifeCircleMvpActivity;
+import com.example.mvp.mvp.view.LifeCircleMvpFragment;
 
 import butterknife.ButterKnife;
 

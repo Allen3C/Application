@@ -7,7 +7,7 @@ import com.example.application.main.beijing.BeiJingFragment;
 import com.example.application.main.hangzhou.HangZhouFragment;
 import com.example.application.main.shanghai.ShangHaiFragment;
 import com.example.application.main.shenzhen.ShenZhenFragment;
-import com.example.application.mvp.base.BaseMvpPresenter;
+import com.example.mvp.mvp.base.BaseMvpPresenter;
 
 public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContract.Iview> implements IMainActivityContract.IPresenter {
     //当前Fragment的 角标

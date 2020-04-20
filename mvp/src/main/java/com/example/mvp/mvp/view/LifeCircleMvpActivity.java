@@ -1,4 +1,4 @@
-package com.example.application.mvp.view;
+package com.example.mvp.mvp.view;
 
 
 import android.content.Intent;
@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.application.mvp.IMvpView;
-import com.example.application.mvp.MvpControler;
+import com.example.mvp.mvp.IMvpView;
+import com.example.mvp.mvp.MvpControler;
 
 //抽象同事  维护p层的生命周期
 //MVP底层框架V层的基类，跟LifeCircleMvpPresenter相对应

@@ -1,12 +1,12 @@
-package com.example.application.mvp.base;
+package com.example.mvp.mvp.base;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.example.application.mvp.IMvpView;
-import com.example.application.mvp.presenter.LifeCircleMvpPresenter;
+import com.example.mvp.mvp.IMvpView;
+import com.example.mvp.mvp.presenter.LifeCircleMvpPresenter;
 
 //抽象中介者  空实现ILifeCircle中的接口
 //因为SplashTimerPresenter直接继承LifeCircleMvpPresenter需要实现太多方法，这些方法有的对来说是没用的

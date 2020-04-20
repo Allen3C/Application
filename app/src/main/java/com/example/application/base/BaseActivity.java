@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.example.application.mvp.view.LifeCircleMvpActivity;
+import com.example.mvp.mvp.view.LifeCircleMvpActivity;
 
 import butterknife.ButterKnife;
 

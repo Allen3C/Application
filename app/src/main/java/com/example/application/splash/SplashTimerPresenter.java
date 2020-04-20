@@ -2,7 +2,7 @@ package com.example.application.splash;
 
 import android.util.Log;
 
-import com.example.application.mvp.base.BaseMvpPresenter;
+import com.example.mvp.mvp.base.BaseMvpPresenter;
 
 
 class SplashTimerPresenter extends BaseMvpPresenter<ISplashActivityContract.Iview> implements ISplashActivityContract.IPresenter{
