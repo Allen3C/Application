@@ -24,14 +24,12 @@ public class ShanghaiAdapter extends RecyclerView.Adapter {
 
     private final ArrayList<ShanghaiBean> mdata;
     private final Activity mContext;
-    private final boolean mIsHor;
     private final RecyclerView.RecycledViewPool recycledViewPool;
 
-    public ShanghaiAdapter(Activity context, ArrayList<ShanghaiBean> data, boolean isHor){
+    public ShanghaiAdapter(Activity context, ArrayList<ShanghaiBean> data){
         recycledViewPool = new RecyclerView.RecycledViewPool();
         mdata = data;
         mContext = context;
-        mIsHor = isHor;
     }
 
     //创建view 然后进行缓存（缓存是因为屏幕滚动，一个条目的view会进行复用，节省内存）
@@ -41,9 +39,6 @@ public class ShanghaiAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == ShanghaiBean.IShanghaiItemType.VERTICAL){
-            if(mIsHor){
-                Log.e("onCreateViewHolder", "VERTICAL");
-            }
             //把RecyclerView子项最外层布局生成view
             //LinearLayout时需要传入parent
             View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_shanghai_fragment, parent, false);
@@ -78,12 +73,13 @@ public class ShanghaiAdapter extends RecyclerView.Adapter {
             ((ShanghaiViewHolder)holder).mTv.setText(shanghaiBean.getmDec());
             ((ShanghaiViewHolder)holder).mTv.setTag(position);
             ((ShanghaiViewHolder)holder).mIv.setVisibility(shanghaiBean.isShowImg()?View.VISIBLE:View.GONE);
+
             //相当于设置标记，因为onCreateViewHolder()里拿不到position
-            ((ShanghaiViewHolder)holder).itemView.setTag(position);
+            ((ShanghaiViewHolder)holder).mIv.setTag(position);
         }else if(holder instanceof ShanghaiViewHolderRv){
 
             //是shanghaiBean.getData()，不是ShanghaiDataManager.getData()
-            ((ShanghaiViewHolderRv)holder).mRecyclerView.setAdapter(new ShanghaiAdapter(mContext, shanghaiBean.getData(), true));
+            ((ShanghaiViewHolderRv)holder).mRecyclerView.setAdapter(new ShanghaiAdapter(mContext, shanghaiBean.getData()));
         }
     }
 
@@ -112,7 +108,8 @@ public class ShanghaiAdapter extends RecyclerView.Adapter {
             super(itemView);
             mTv = itemView.findViewById(R.id.item_shanghai_tv);
             mIv = itemView.findViewById(R.id.item_shanghai_iv);
-            this.itemView.setOnClickListener(new View.OnClickListener() {
+            //转场动画应该给图片设置点击事件
+            this.mIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    int position = (int)v.getTag();

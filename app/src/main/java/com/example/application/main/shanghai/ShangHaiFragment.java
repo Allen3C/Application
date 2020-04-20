@@ -46,7 +46,7 @@ public class ShangHaiFragment extends BaseFragment {
         shanghaiRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
 
         //getActivity()返回一个和此fragment绑定的FragmentActivity或者其子类的实例
-        shanghaiRecyclerview.setAdapter(new ShanghaiAdapter(getActivity(), ShanghaiDataManager.getData(), false));
+        shanghaiRecyclerview.setAdapter(new ShanghaiAdapter(getActivity(), ShanghaiDataManager.getData()));
     }
 
     private void initListener() {
