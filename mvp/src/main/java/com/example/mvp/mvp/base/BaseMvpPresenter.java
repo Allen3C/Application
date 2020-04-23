@@ -71,4 +71,7 @@ public abstract class BaseMvpPresenter<T extends IMvpView> extends LifeCircleMvp
     public void onSaveInstanceState(Bundle bundle) {
 
     }
+
+
+
 }

@@ -5,6 +5,7 @@ import com.example.mvp.mvp.IMvpView;
 import com.example.mvp.mvp.MvpControler;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 //抽象中介者，保护和获取v层引用
 //基类  P层
@@ -18,9 +19,9 @@ public abstract class LifeCircleMvpPresenter<T extends IMvpView> implements ILif
         super();
     }
 
-
     //在构造方法里进行生命周期的关联
-    public LifeCircleMvpPresenter(IMvpView iMvpView){
+    //T 也行
+    public LifeCircleMvpPresenter( IMvpView iMvpView){
         super();
         attachView(iMvpView);
         //使代理类持有p层

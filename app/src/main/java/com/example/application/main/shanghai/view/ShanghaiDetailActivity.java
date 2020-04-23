@@ -16,22 +16,20 @@ import androidx.core.view.ViewCompat;
 import com.example.application.R;
 import com.example.application.base.BaseActivity;
 import com.example.application.base.ViewInject;
+import com.example.application.main.shanghai.If.IShanghaiDetailContract;
+import com.example.application.main.shanghai.manager.GetXiaoHuaTask;
+import com.example.application.main.shanghai.module.ShangHaiDetailHttpTask;
+import com.example.application.main.shanghai.presenter.ShanghaiDetailPresenter;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
 
 import butterknife.BindView;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
+
 @ViewInject(mainlayoutid = R.layout.acrivity_shanghai_detail)
-public class ShanghaiDetailActivity extends BaseActivity {
+public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDetailContract.Iview {
+    IShanghaiDetailContract.IPresenter mPresenter = new ShanghaiDetailPresenter(this);
+
     public static String mActivityOptionsCompat = "ActivityOptionsCompat";
     @BindView(R.id.iv_shanghai_detail)
     ImageView ivShanghaiDetail;
@@ -39,56 +37,74 @@ public class ShanghaiDetailActivity extends BaseActivity {
     @Override
     public void afterBindView() {
         initAnima();
-        //initGetNetData();
-        initPostNetData();
+        initGetNetData();
+        //initPostNetData();
 
     }
 
-    private void initPostNetData() {
-        OkHttpClient client = new OkHttpClient();
-        FormBody.Builder builder = new FormBody.Builder();
-        builder.add("key", "6c08233485a6d4ab085b215046fe2170");
-        Request request = new Request.Builder().url("http://apis.juhe.cn/lottery/types").post(builder.build()).build();
-        Call call = client.newCall(request);
-        //异步请求
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.e("initGetNetData", "onFailure" + e);
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                Log.e("initGetNetData", "onResponse" + response.body().string());
-            }
-        });
-    }
+//    private void initPostNetData() {
+//        OkHttpClient client = new OkHttpClient();
+//        FormBody.Builder builder = new FormBody.Builder();
+//        builder.add("key", "6c08233485a6d4ab085b215046fe2170");
+//        Request request = new Request.Builder().url("http://apis.juhe.cn/lottery/types").post(builder.build()).build();
+//        Call call = client.newCall(request);
+//        //异步请求
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                Log.e("initGetNetData", "onFailure" + e);
+//            }
+//
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                Log.e("initGetNetData", "onResponse" + response.body().string());
+//            }
+//        });
+//    }
 
     //发送网络请求数据
     private void initGetNetData() {
-        OkHttpClient client = new OkHttpClient();
-        HttpUrl.Builder builder = HttpUrl.parse("http://v.juhe.cn/joke/content/list.php").newBuilder();
-        builder.addQueryParameter("sort", "desc");
-        builder.addQueryParameter("page", "1");
-        builder.addQueryParameter("pagesize", "2");
-        //System.currentTimeMillis()  13位毫秒数
-        builder.addQueryParameter("time", "" + System.currentTimeMillis()/1000);
-        builder.addQueryParameter("key", "c3445bee630adef5e31bf1a0231b2efe");
-        //Request request = new Request.Builder().url("http://www.baidu.com").get().build();  //建造者设计模式
-        Request request = new Request.Builder().url(builder.build()).get().build();
-        Call call = client.newCall(request);
-        //异步请求
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.e("initGetNetData", "onFailure" + e);
-            }
 
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                Log.e("initGetNetData", "onResponse" + response.body().string());
-            }
-        });
+        mPresenter.getNetData();
+
+
+//        GetXiaoHuaTask task = new GetXiaoHuaTask();
+//        task.execute("desc", "1", "2");
+
+//        Object desc = new ShangHaiDetailHttpTask().getXiaoHuaList("desc", "1", "2");
+//        if(desc instanceof Response){
+//            Response response = (Response)desc;
+//            Log.e("initGetNetData", response.body().toString());
+//        }
+
+
+//        //1.可以隔离
+//        OkHttpClient client = new OkHttpClient();
+//        //2.可以隔离  1）构建url 2）构建参数
+//        HttpUrl.Builder builder = HttpUrl.parse("http://v.juhe.cn/joke/content/list.php").newBuilder();
+//        builder.addQueryParameter("sort", "desc");
+//        builder.addQueryParameter("page", "1");
+//        builder.addQueryParameter("pagesize", "2");
+//        //System.currentTimeMillis()  13位毫秒数
+//        builder.addQueryParameter("time", "" + System.currentTimeMillis()/1000);
+//        builder.addQueryParameter("key", "c3445bee630adef5e31bf1a0231b2efe");
+//        //3.可以隔离 构建request
+//        Request request = new Request.Builder().url(builder.build()).get().build();
+//        //4.可以隔离  构建call
+//        Call call = client.newCall(request);
+//        //异步请求
+//        //5.发送网络请求
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                Log.e("initGetNetData", "onFailure" + e);
+//            }
+//
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                Log.e("initGetNetData", "onResponse" + response.body().string());
+//            }
+//        });
     }
 
     private void initAnima() {
