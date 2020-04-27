@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import okhttp3.Response;
 
+//作废
 //同步请求不能放到主线程
 //三个参数意义分别为:传进的参数,处理过程产生的变量,线程执行完返回的结果
 public class GetXiaoHuaTask extends AsyncTask<Object, Object, Object> {

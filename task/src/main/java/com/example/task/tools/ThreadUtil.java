@@ -4,7 +4,7 @@ package com.example.task.tools;
 import android.os.Handler;
 import android.os.Looper;
 
-//把onSuccess()抛到主线程
+//把onComplete()抛到主线程
 public class ThreadUtil {
     //主线程的Handler
     private final static Handler MAIN = new Handler(Looper.getMainLooper());

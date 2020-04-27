@@ -12,4 +12,6 @@ public class ShenZhenFragment extends BaseFragment {
     public void afterBindView() {
 
     }
+
+
 }

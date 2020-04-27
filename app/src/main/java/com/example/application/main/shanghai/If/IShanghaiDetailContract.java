@@ -1,8 +1,6 @@
 package com.example.application.main.shanghai.If;
 
-import androidx.fragment.app.Fragment;
-
-import com.example.application.main.IMainActivityContract;
+import com.example.application.main.shanghai.dto.ShanghaiDetailBean;
 import com.example.mvp.mvp.ILifeCircle;
 import com.example.mvp.mvp.IMvpView;
 import com.example.mvp.mvp.MvpControler;
@@ -11,15 +9,20 @@ public interface IShanghaiDetailContract {
     interface Iview extends IMvpView {
 
 
-
+        void showData(ShanghaiDetailBean data);
     }
     interface IPresenter extends ILifeCircle {
 
 
-        void getNetData();
+        void getNetData(String pagesize);
     }
 
     IShanghaiDetailContract.Iview emptyView = new IShanghaiDetailContract.Iview() {
+
+        @Override
+        public void showData(ShanghaiDetailBean data) {
+
+        }
 
         @Override
         public MvpControler getMvpControler() {

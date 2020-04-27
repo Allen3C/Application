@@ -43,6 +43,7 @@ public class OkHttpScheduler extends HttpScheduler {
         }
         Request okHttpRequest = requestBuilder.build();
         Call call = getClient().newCall(okHttpRequest);
+        //这个call是OKHttp的call，函数需要返回的是自定义的ICall
         OkHttpCall okHttpCall = new OkHttpCall(request, call);
         return okHttpCall;
     }

@@ -33,6 +33,7 @@ public class TaskScheduler {
         handlerThread.start();
         this.handler = new Handler(handlerThread.getLooper(), new Handler.Callback() {
             //handlerThread handleMessage 运行在子线程
+            //线程里的Looper，不传handlerThread.getLooper() 就运行在主线程  这样才能实现主线程给子线程发消息
             @Override
             public boolean handleMessage(@NonNull Message msg) {
                 switch (msg.what){
@@ -44,7 +45,8 @@ public class TaskScheduler {
             }
         });
         //创建一个线程池
-        BlockingQueue<Runnable> poolQueue = new LinkedBlockingQueue<>();//无大小限制的队列
+        BlockingQueue<Runnable> poolQueue = new LinkedBlockingQueue<>();//无大小限制的队列  FutureTask就是一个Runnable
+        //参照ForkJoinPool，根据cpu创建线程池
         this.executor = new PriorityThreadPoolExecutor(
                 COREPOOLSIZE,
                 MAXIMUMPOOLSIZE,
@@ -53,6 +55,7 @@ public class TaskScheduler {
                 poolQueue,
                 new TaskThreadFactory());
     }
+
 
     private void doSubmitTask(AsyncTaskInstance taskInstance) {
         executor.submit(taskInstance);
@@ -66,6 +69,7 @@ public class TaskScheduler {
     }
 
     public void submit(AsyncTaskInstance instance) {
+        //主线程给子线程发消息
         handler.sendMessage(handler.obtainMessage(ITaskSchedulerType.SUBMIT_TASK, instance));
 
     }

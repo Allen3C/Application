@@ -17,6 +17,7 @@ import com.example.application.R;
 import com.example.application.base.BaseActivity;
 import com.example.application.base.ViewInject;
 import com.example.application.main.shanghai.If.IShanghaiDetailContract;
+import com.example.application.main.shanghai.dto.ShanghaiDetailBean;
 import com.example.application.main.shanghai.manager.GetXiaoHuaTask;
 import com.example.application.main.shanghai.module.ShangHaiDetailHttpTask;
 import com.example.application.main.shanghai.presenter.ShanghaiDetailPresenter;
@@ -65,7 +66,7 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     //发送网络请求数据
     private void initGetNetData() {
 
-        mPresenter.getNetData();
+        mPresenter.getNetData("1");
 
 
 //        GetXiaoHuaTask task = new GetXiaoHuaTask();
@@ -128,5 +129,10 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
             ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, pair);
             ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle());
         }
+    }
+
+    @Override
+    public void showData(ShanghaiDetailBean data) {
+
     }
 }

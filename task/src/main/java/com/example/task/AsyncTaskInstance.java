@@ -5,6 +5,7 @@ import com.example.task.tools.ThreadUtil;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
+//FutureTask就是一个Runnable
 public class AsyncTaskInstance<Result> extends FutureTask<Result> {
     private final ITaskBackground iTaskBackground;
     private final ITaskCallback iTaskCallback;
@@ -12,6 +13,7 @@ public class AsyncTaskInstance<Result> extends FutureTask<Result> {
     //不在构造方法里传Callable，在super()里new。只向外暴露ITaskBackground iTaskBackground, ITaskCallback iTaskCallback两个参数
     public AsyncTaskInstance(final ITaskBackground<Result> iTaskBackground, ITaskCallback<Result> iTaskCallback) {
         super(new Callable<Result>() {
+            //运行在子线程
             @Override
             public Result call() throws Exception {
                 return iTaskBackground.onBackground();
@@ -50,6 +52,7 @@ public class AsyncTaskInstance<Result> extends FutureTask<Result> {
                 ThreadUtil.postMainThread(new Runnable() {
                     @Override
                     public void run() {
+                        //一定要回调到主线程
                         iTaskCallback.onComplete(object);
                     }
                 });

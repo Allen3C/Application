@@ -10,8 +10,6 @@ import com.example.application.main.shanghai.module.ShangHaiDetailHttpTask;
 import com.example.http.result.IResult;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-
 
 public class ShanghaiDetailPresenter extends BasePresenter<IShanghaiDetailContract.Iview> implements IShanghaiDetailContract.IPresenter {
     public ShanghaiDetailPresenter(IShanghaiDetailContract.Iview view) {
@@ -24,7 +22,7 @@ public class ShanghaiDetailPresenter extends BasePresenter<IShanghaiDetailContra
     }
 
     @Override
-    public void getNetData() {
+    public void getNetData(String pagesize) {
 //        submitTask(new LfTask() {
 //            //一定要回调到主线程
 //            @Override
@@ -56,16 +54,17 @@ public class ShanghaiDetailPresenter extends BasePresenter<IShanghaiDetailContra
 
             @Override
             public IResult<ShanghaiDetailBean> onBackground() {
-                return new ShangHaiDetailHttpTask<ShanghaiDetailBean>().getXiaoHuaList("desc", "1", "2");
+                return new ShangHaiDetailHttpTask<ShanghaiDetailBean>().getXiaoHuaList("desc", "1", pagesize + "");
             }
 
             @Override
             public void onSuccess(IResult<ShanghaiDetailBean> t) {
                 ShanghaiDetailBean data = t.data();
-                //仅限演示
-                Gson gson = new Gson();
-                String s = gson.toJson(data);
-                Log.e("ShanghaiDetailPresenter", s);
+//                //仅限演示
+//                Gson gson = new Gson();
+//                String s = gson.toJson(data);
+//                Log.e("ShanghaiDetailPresenter", s);
+                getView().showData(data);
             }
         });
 

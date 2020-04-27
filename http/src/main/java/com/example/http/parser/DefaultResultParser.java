@@ -26,7 +26,7 @@ public class DefaultResultParser implements IParser {
         return mInstance;
     }
 
-    //使用json解析三方库讲 String字符串 解析为 Type（使用任何三方库都要包装一下，以免以后换三方库时麻烦）
+    //使用json解析三方库将 String字符串（json） 解析为 Type（就是定义的Bean）
     @Override
     public IResult parseResponse(IRequest iRequest, IResponse iResponse) {
         Type type = iRequest.getType();

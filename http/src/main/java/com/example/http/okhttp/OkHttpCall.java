@@ -11,7 +11,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 //静态代理模式 代理类
-//将第三方库的call  转为  自定义的ICall
+//代理OKHttp的call
 public class OkHttpCall implements ICall {
     private final Call call;
     private IRequest request;
@@ -29,6 +29,7 @@ public class OkHttpCall implements ICall {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //静态代理
         OkHttpResponse okHttpResponse = new OkHttpResponse(response);
         return okHttpResponse;
     }
