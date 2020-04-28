@@ -30,25 +30,46 @@
         android:background="@color/color_back_30"
         android:layout_alignParentBottom="true">
 
-        <RadioGroup
+        <LinearLayout
+            android:gravity="center_vertical"
             android:id="@+id/rg_main_top"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_gravity="center_vertical">
-
-            <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/rb_main_shanghai"
-                android:drawableTop="@drawable/selecter_main_top_tab_shanghai"
-                android:text="@string/str_main_shanghai"
-                style="@style/main_tab_rb_style" />
-            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                app:lottie_fileName="lottie/shanghai.json"/>
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/rb_main_hangzhou"
-                android:drawableTop="@drawable/selecter_main_top_tab_hangzhou"
-                android:text="@string/str_main_hangzhou"
-                style="@style/main_tab_rb_style"/>
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                app:lottie_fileName="lottie/hangzhou.json"/>
 
-        </RadioGroup>
+        </LinearLayout>
+
+<!--        <RadioGroup-->
+<!--            android:id="@+id/rg_main_top"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_gravity="center_vertical">-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/rb_main_shanghai"-->
+<!--                android:drawableTop="@drawable/selecter_main_top_tab_shanghai"-->
+<!--                android:text="@string/str_main_shanghai"-->
+<!--                style="@style/main_tab_rb_style" />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rb_main_hangzhou"-->
+<!--                android:drawableTop="@drawable/selecter_main_top_tab_hangzhou"-->
+<!--                android:text="@string/str_main_hangzhou"-->
+<!--                style="@style/main_tab_rb_style"/>-->
+
+<!--        </RadioGroup>-->
 
 
         <RadioGroup

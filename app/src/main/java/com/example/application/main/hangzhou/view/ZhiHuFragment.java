@@ -1,5 +1,7 @@
 package com.example.application.main.hangzhou.view;
 
+import android.view.animation.AnimationUtils;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +30,8 @@ public class ZhiHuFragment extends BaseFragment implements IShanghaiDetailContra
     @Override
     public void afterBindView() {
         zhihuRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
+        //给RecyclerView设置补间动画
+        zhihuRecyclerview.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.zhihu_recyclerview_show));
         mPresenter.getNetData("20");
     }
 
