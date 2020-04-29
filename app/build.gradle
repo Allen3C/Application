@@ -50,6 +50,8 @@ dependencies {
     implementation project(path: ':http')
     //task Module的依赖引入
     implementation project(path: ':task')
+    //refresh Module的依赖引入
+    implementation project(path: ':refresh')
     //json解析三方库
     implementation 'com.google.code.gson:gson:2.8.6'
 

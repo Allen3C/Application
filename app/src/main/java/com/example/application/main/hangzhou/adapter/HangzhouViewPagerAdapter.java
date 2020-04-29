@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.application.main.hangzhou.view.JiKeFragment;
+import com.example.application.main.hangzhou.view.RefreshFragment;
 import com.example.application.main.hangzhou.view.ZhiHuFragment;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class HangzhouViewPagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
         titleList.add("知乎");
         titleList.add("即刻");
+        titleList.add("下拉刷新");
     }
 
     //不要一开始把Fragment都new出来
@@ -29,6 +31,8 @@ public class HangzhouViewPagerAdapter extends FragmentStatePagerAdapter {
                return new ZhiHuFragment();
             case 1:
                 return new JiKeFragment();
+            case 2:
+                return new RefreshFragment();
             default:
                 return null;
         }
