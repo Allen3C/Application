@@ -1,5 +1,6 @@
 package com.example.application.splash;
 
+import com.example.annotation.MvpEmptyViewFactory;
 import com.example.mvp.mvp.ILifeCircle;
 import com.example.mvp.mvp.IMvpView;
 import com.example.mvp.mvp.MvpControler;
@@ -8,6 +9,7 @@ import com.example.mvp.mvp.MvpControler;
 //为了扩展性更好，以后每一对v和p都会有一个contract类，
 // 因为每个的功能（如 void settvSplashTimer(String timer);）不同，不能把所有的功能都写到IMvpView中
 public interface ISplashActivityContract {
+    @MvpEmptyViewFactory
     interface Iview extends IMvpView{
         //在SplashActivity里具体实现，供SplashTimerPresenter调用
         void settvSplashTimer(String timer);

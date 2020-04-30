@@ -1,0 +1,17 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //生成Java文件的工具
+    implementation 'com.squareup:javapoet:1.9.0'
+    //在特定路径下生成配置文件
+    implementation 'com.google.auto.service:auto-service:1.0-rc3'
+    //gradle在5.0以后为了加快编译速度，跳过的自定义增量编译，需要加上如下代码实现生成自定义注解相关文件
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
+    //引用到annotation里的注解
+    implementation project(':annotation')
+
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

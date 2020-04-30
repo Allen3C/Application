@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import com.example.mvp.mvp.view.LifeCircleMvpActivity;
 
 import butterknife.ButterKnife;
-
+//注入butterknife
 public abstract class BaseActivity extends LifeCircleMvpActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -44,14 +44,17 @@ dependencies {
 
     //OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.5.0")
-    //MVP Module 的依赖引入
+
+    //Module 的依赖引入
     implementation project(path: ':mvp')
-    //okhttp Module的依赖引入
     implementation project(path: ':http')
-    //task Module的依赖引入
     implementation project(path: ':task')
-    //refresh Module的依赖引入
     implementation project(path: ':refresh')
+
+    //apt
+    implementation project(path: ':annotation')
+    annotationProcessor project(path: ':apt')
+
     //json解析三方库
     implementation 'com.google.code.gson:gson:2.8.6'
 

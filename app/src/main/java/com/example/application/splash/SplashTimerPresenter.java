@@ -2,10 +2,10 @@ package com.example.application.splash;
 
 import android.util.Log;
 
-import com.example.mvp.mvp.base.BaseMvpPresenter;
+import com.example.application.base.BasePresenter;
 
 
-class SplashTimerPresenter extends BaseMvpPresenter<ISplashActivityContract.Iview> implements ISplashActivityContract.IPresenter{
+class SplashTimerPresenter extends BasePresenter<ISplashActivityContract.Iview> implements ISplashActivityContract.IPresenter{
 
     private CustomCountDownTimer timer;
 
@@ -52,9 +52,9 @@ class SplashTimerPresenter extends BaseMvpPresenter<ISplashActivityContract.Ivie
         Log.e("SplashTimerPresenter", "onDestroy");
     }
 
-    //防止空指针异常
-    @Override
-    protected ISplashActivityContract.Iview getEmptyView() {
-        return ISplashActivityContract.emptyView;
-    }
+//    //防止空指针异常
+//    @Override
+//    protected ISplashActivityContract.Iview getEmptyView() {
+//        return ISplashActivityContract.emptyView;
+//    }
 }

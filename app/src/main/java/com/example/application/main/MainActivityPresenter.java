@@ -3,13 +3,14 @@ package com.example.application.main;
 import androidx.fragment.app.Fragment;
 
 import com.example.application.R;
+import com.example.application.base.BasePresenter;
 import com.example.application.main.beijing.BeiJingFragment;
 import com.example.application.main.hangzhou.HangZhouFragment;
 import com.example.application.main.shanghai.ShangHaiFragment;
 import com.example.application.main.shenzhen.ShenZhenFragment;
 import com.example.mvp.mvp.base.BaseMvpPresenter;
 
-public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContract.Iview> implements IMainActivityContract.IPresenter {
+public class MainActivityPresenter extends BasePresenter<IMainActivityContract.Iview> implements IMainActivityContract.IPresenter {
     //当前Fragment的 角标
     private int mCurrentFragmentIndex;
     //用数组存放Fragment实例
@@ -23,10 +24,10 @@ public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContrac
         super(view);
     }
 
-    @Override
-    protected IMainActivityContract.Iview getEmptyView() {
-        return IMainActivityContract.emptyView;
-    }
+//    @Override
+//    protected IMainActivityContract.Iview getEmptyView() {
+//        return IMainActivityContract.emptyView;
+//    }
 
     @Override
     public void initHomeFragment() {
