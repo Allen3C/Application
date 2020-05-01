@@ -5,11 +5,17 @@
     android:layout_height="match_parent">
 
     <ImageView
-
         android:id="@+id/iv_shanghai_detail"
         android:scaleType="centerCrop"
         android:src="@mipmap/shanghai"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_crash"-->
+<!--        android:gravity="center"-->
+<!--        android:text="子线程崩溃"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"/>-->
 
 </LinearLayout>
