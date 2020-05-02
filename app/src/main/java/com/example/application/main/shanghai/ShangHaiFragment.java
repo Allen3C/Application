@@ -14,15 +14,17 @@ import com.example.application.base.tools.AnimatorUtil;
 import com.example.application.base.BaseFragment;
 import com.example.application.base.ViewInject;
 import com.example.application.base.tools.DoubleClickListener;
+import com.example.application.main.shanghai.If.IPlayerServiceContract;
 import com.example.application.main.shanghai.adapter.ShanghaiAdapter2;
+import com.example.application.main.shanghai.presenter.PlayerServicePresenter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import butterknife.BindView;
 
 @ViewInject(mainlayoutid = R.layout.fragment_shanghai)
-public class ShangHaiFragment extends BaseFragment {
-
+public class ShangHaiFragment extends BaseFragment implements IPlayerServiceContract.Iview{
+    IPlayerServiceContract.IPresenter mPresenter = new PlayerServicePresenter(this);
 
     @BindView(R.id.tv_shanghai_welcome)
     TextView tvShanghaiWelcome;
@@ -79,6 +81,7 @@ public class ShangHaiFragment extends BaseFragment {
                     AnimatorUtil.startTranslationXAnim(tvShanghaiWelcome, tvShanghaiWelcome.getTranslationX(), tvShanghaiWelcome.getTranslationX() + 150, null);
                     tvMarqueeTitle.setVisibility(View.GONE);
                     AnimatorUtil.startTranslationXAnim(tvMarqueeTitle, tvMarqueeTitle.getTranslationX(), tvMarqueeTitle.getTranslationX() + 150, null);
+                    mPresenter.playOrPaused();
                 }else {
                     //播放音视频动画
                     AnimatorUtil.startTranslationXAnim(tvShanghaiWelcome, tvShanghaiWelcome.getTranslationX(), tvShanghaiWelcome.getTranslationX() - 150, null);
@@ -89,6 +92,8 @@ public class ShangHaiFragment extends BaseFragment {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             tvMarqueeTitle.setVisibility(View.VISIBLE);
+                            //启动Service 播放后台音乐
+                            mPresenter.bindService(mContext);
                         }
                     });
                 }

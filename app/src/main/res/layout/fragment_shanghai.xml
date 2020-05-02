@@ -47,7 +47,7 @@
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         android:marqueeRepeatLimit="marquee_forever"
-                        android:text="今日播放歌曲：天空之城"
+                        android:text="今日播放歌曲：亲爱的你"
                         android:ellipsize="marquee"
                         android:singleLine="true"
                         android:textSize="15dp"

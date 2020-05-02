@@ -51,6 +51,7 @@ dependencies {
     implementation project(path: ':http')
     implementation project(path: ':task')
     implementation project(path: ':refresh')
+    implementation project(path: ':player')
 
     //apt
     implementation project(path: ':annotation')

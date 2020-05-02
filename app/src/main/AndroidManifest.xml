@@ -24,7 +24,9 @@
             </intent-filter>
         </activity>
 
-
+        <!--播放器配置信息-->
+        <meta-data android:name="playertype"
+            android:value="1" />
     </application>
 
 </manifest>
