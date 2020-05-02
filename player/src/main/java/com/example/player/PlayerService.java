@@ -20,6 +20,7 @@ public class PlayerService extends Service implements IPlayerListener {
     private IPlayer mPlayer;
     private PlayerFactory mPlayerFactory;
 
+    //获取 播放器状态
     @Override
     public void playerStateChanged(PlayerState state) {
         this.mState = state;
@@ -69,6 +70,7 @@ public class PlayerService extends Service implements IPlayerListener {
                 }
                 //拿到播放器去播放
                 mPlayer.prepare(mContext, url);
+                //设置监听
                 mPlayer.setPlayingListener(this);
                 break;
             case STARTED:

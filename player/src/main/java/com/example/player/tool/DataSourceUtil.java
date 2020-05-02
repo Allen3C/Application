@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
+//获取播放器配置信息，就是选择什么播放器
 public class DataSourceUtil {
     public static int getMetaDataFromApp(Context context) {
         int value = 0;

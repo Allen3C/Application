@@ -9,14 +9,16 @@ import com.example.player.state.PlayerState;
 
 import java.io.IOException;
 
+//MediaPlayer播放器
 public class GoogleMediaPlayer implements IPlayer, MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnInfoListener, MediaPlayer.OnVideoSizeChangedListener, MediaPlayer.OnBufferingUpdateListener {
 
     private MediaPlayer mMediaPlayer;
     private IPlayerListener mPlayerListener;
 
     public GoogleMediaPlayer(){
-        //知道有这些监听，用到去百度
+        //创建一个MediaPlayer
         mMediaPlayer = new MediaPlayer();
+        //知道有这些监听，用到去百度
         mMediaPlayer.setOnPreparedListener(this);
         mMediaPlayer.setOnErrorListener(this);
         mMediaPlayer.setOnCompletionListener(this);
@@ -58,15 +60,14 @@ public class GoogleMediaPlayer implements IPlayer, MediaPlayer.OnPreparedListene
         }
     }
 
+    //设置监听
     @Override
     public void setPlayingListener(IPlayerListener listener) {
         this.mPlayerListener = listener;
     }
-
-
-
     private void setPlayerState(PlayerState state) {
         if(mPlayerListener != null){
+            //把播放器状态传进去
             mPlayerListener.playerStateChanged(state);
         }
     }

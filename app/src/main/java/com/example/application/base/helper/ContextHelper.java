@@ -3,7 +3,7 @@ package com.example.application.base.helper;
 import android.app.Application;
 import android.content.Context;
 
-
+//全局Context获取
 public class ContextHelper {
 
     private static ContextHelper mInstance;
