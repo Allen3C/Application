@@ -4,9 +4,10 @@ import java.io.File;
 
 
 //Raw文件播放源
-public class RawPlayerSource implements IPlayerSouece {
+public class RawPlayerSource implements IPlayerSource {
 
     private String url;
+    private int resId;
 
 
     //"android.resource://" + getPackageName() + File.separator + R.raw.splash
@@ -15,13 +16,23 @@ public class RawPlayerSource implements IPlayerSouece {
         this.url = url;
     }
 
-    public IPlayerSouece setPath(String packageName, int rawId){
+    public IPlayerSource setPath(String packageName, int rawId){
         setUrl("android.resource://" + packageName + File.separator + rawId);
+        setResId(rawId);
         return this;
+    }
+
+    private void setResId(int rawId) {
+        this.resId = rawId;
     }
 
     @Override
     public String getUrl() {
         return url;
+    }
+
+    @Override
+    public int getResId() {
+        return resId;
     }
 }

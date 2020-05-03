@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import com.example.player.player.IPlayer;
 import com.example.player.player.IPlayerListener;
 import com.example.player.player.PlayerFactory;
-import com.example.player.source.IPlayerSouece;
+import com.example.player.source.IPlayerSource;
 import com.example.player.state.PlayerState;
 
 public class PlayerService extends Service implements IPlayerListener {
@@ -50,11 +50,10 @@ public class PlayerService extends Service implements IPlayerListener {
         super.onCreate();
     }
 
-    public void playOrPause(IPlayerSouece playerSouece, Context mContext) {
+    public void playOrPause(IPlayerSource playerSorece, Context mContext) {
         switch (mState){
             case IDLE:
                 //初始化播放器 去播放
-                String url = playerSouece.getUrl();
                 if(mPlayer != null){
                     mPlayer.relese();
                 }
@@ -68,10 +67,11 @@ public class PlayerService extends Service implements IPlayerListener {
                     //播放器创建失败
                     return;
                 }
-                //拿到播放器去播放
-                mPlayer.prepare(mContext, url);
+                //先设置监听，再prepare，不然ExoPlayer的prepare里状态改变之后这边回调不了
                 //设置监听
                 mPlayer.setPlayingListener(this);
+                //拿到播放器去播
+                mPlayer.prepare(mContext, playerSorece);
                 break;
             case STARTED:
                 //去暂停

@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.player.source.IPlayerSource;
 import com.example.player.state.PlayerState;
 
 import java.io.IOException;
@@ -49,11 +50,11 @@ public class GoogleMediaPlayer implements IPlayer, MediaPlayer.OnPreparedListene
     }
 
     @Override
-    public void prepare(Context context, String url) {
+    public void prepare(Context context, IPlayerSource iPlayerSource) {
         //操作MediaPlayer
         //MediaPlayer 播放系统资源时只能用 uri的方式
         try {
-            mMediaPlayer.setDataSource(context, Uri.parse(url));
+            mMediaPlayer.setDataSource(context, Uri.parse(iPlayerSource.getUrl()));
             mMediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,6 +74,7 @@ public class GoogleMediaPlayer implements IPlayer, MediaPlayer.OnPreparedListene
     }
 
     //播放器准备好后的回调
+    //通过回调播放，ExoPlayer直接在prepare里播放
     @Override
     public void onPrepared(MediaPlayer mp) {
         //初始化成功 且 播放器准备好后回调

@@ -17,5 +17,9 @@
 <!--        android:text="子线程崩溃"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="100dp"/>-->
+    <android.opengl.GLSurfaceView
+        android:id="@+id/glsurfaceview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
 
 </LinearLayout>

@@ -2,12 +2,11 @@ package com.example.application.main.shanghai.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.opengl.GLSurfaceView;
 import android.os.Build;
-
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
@@ -19,13 +18,13 @@ import com.example.application.base.BaseActivity;
 import com.example.application.base.ViewInject;
 import com.example.application.main.shanghai.If.IShanghaiDetailContract;
 import com.example.application.main.shanghai.dto.ShanghaiDetailBean;
-import com.example.application.main.shanghai.manager.GetXiaoHuaTask;
-import com.example.application.main.shanghai.module.ShangHaiDetailHttpTask;
 import com.example.application.main.shanghai.presenter.ShanghaiDetailPresenter;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 
 import butterknife.BindView;
-import okhttp3.Response;
+import butterknife.ButterKnife;
 
 
 @ViewInject(mainlayoutid = R.layout.acrivity_shanghai_detail)
@@ -35,11 +34,29 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     public static String mActivityOptionsCompat = "ActivityOptionsCompat";
     @BindView(R.id.iv_shanghai_detail)
     ImageView ivShanghaiDetail;
+    @BindView(R.id.glsurfaceview)
+    GLSurfaceView glsurfaceview;
 //    @BindView(R.id.tv_crash)
 //    TextView mTvCrash;
 
     @Override
     public void afterBindView() {
+        glsurfaceview.setRenderer(new GLSurfaceView.Renderer() {
+            @Override
+            public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+                //都是子线程回调
+            }
+
+            @Override
+            public void onSurfaceChanged(GL10 gl, int width, int height) {
+
+            }
+
+            @Override
+            public void onDrawFrame(GL10 gl) {
+                //循环调用  进行渲染
+            }
+        });
         initAnima();
         initGetNetData();
 //        ivShanghaiDetail.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +148,7 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     }
 
     private void initAnima() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //setTransitionName也可以在xml里配
             ViewCompat.setTransitionName(ivShanghaiDetail, mActivityOptionsCompat);
 
@@ -143,9 +160,9 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     }
 
     //用于Android 5.0 系统的 界面转场动画  ，  共享元素动画
-    public static void start_5_0(Activity activity, View view){
+    public static void start_5_0(Activity activity, View view) {
         //如果Android版本大于等于 5.0
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Intent intent = new Intent(activity, ShanghaiDetailActivity.class);
             Pair pair = new Pair(view, mActivityOptionsCompat);
             ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, pair);
@@ -156,5 +173,12 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     @Override
     public void showData(ShanghaiDetailBean data) {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
