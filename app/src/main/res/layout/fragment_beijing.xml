@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:layout_gravity="center"
+        android:text="去上海"
+        android:id="@+id/bt_play"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/str_main_beijing"/>
+        android:layout_height="200dp"/>
 
 </LinearLayout>

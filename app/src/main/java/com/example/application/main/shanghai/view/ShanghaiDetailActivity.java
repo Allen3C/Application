@@ -1,10 +1,14 @@
 package com.example.application.main.shanghai.view;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,6 +20,7 @@ import androidx.core.view.ViewCompat;
 import com.example.application.R;
 import com.example.application.base.BaseActivity;
 import com.example.application.base.ViewInject;
+import com.example.application.main.beijing.ProcessDataTest;
 import com.example.application.main.shanghai.If.IShanghaiDetailContract;
 import com.example.application.main.shanghai.dto.ShanghaiDetailBean;
 import com.example.application.main.shanghai.presenter.ShanghaiDetailPresenter;
@@ -34,117 +39,56 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     public static String mActivityOptionsCompat = "ActivityOptionsCompat";
     @BindView(R.id.iv_shanghai_detail)
     ImageView ivShanghaiDetail;
-    @BindView(R.id.glsurfaceview)
-    GLSurfaceView glsurfaceview;
-//    @BindView(R.id.tv_crash)
-//    TextView mTvCrash;
+    private GetProcessReceiver getProcessReceiver;
+//    @BindView(R.id.glsurfaceview)
+//    GLSurfaceView glsurfaceview;
+
 
     @Override
     public void afterBindView() {
-        glsurfaceview.setRenderer(new GLSurfaceView.Renderer() {
-            @Override
-            public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-                //都是子线程回调
-            }
-
-            @Override
-            public void onSurfaceChanged(GL10 gl, int width, int height) {
-
-            }
-
-            @Override
-            public void onDrawFrame(GL10 gl) {
-                //循环调用  进行渲染
-            }
-        });
-        initAnima();
-        initGetNetData();
-//        ivShanghaiDetail.setOnClickListener(new View.OnClickListener() {
+//        glsurfaceview.setRenderer(new GLSurfaceView.Renderer() {
 //            @Override
-//            public void onClick(View v) {
-//                String s = null;
-//                s.toString();
+//            public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+//                //都是子线程回调
 //            }
-//        });
-        //initPostNetData();
-//        mTvCrash.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        String s = null;
-//                        s.toString();
 //
-//                    }
-//                }).start();
+//            @Override
+//            public void onSurfaceChanged(GL10 gl, int width, int height) {
+//
+//            }
+//
+//            @Override
+//            public void onDrawFrame(GL10 gl) {
+//                //循环调用  进行渲染
 //            }
 //        });
+        initAnima();
+        initReceiver();
+        initProcessData();
+        initGetNetData();
     }
 
-//    private void initPostNetData() {
-//        OkHttpClient client = new OkHttpClient();
-//        FormBody.Builder builder = new FormBody.Builder();
-//        builder.add("key", "6c08233485a6d4ab085b215046fe2170");
-//        Request request = new Request.Builder().url("http://apis.juhe.cn/lottery/types").post(builder.build()).build();
-//        Call call = client.newCall(request);
-//        //异步请求
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                Log.e("initGetNetData", "onFailure" + e);
-//            }
-//
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                Log.e("initGetNetData", "onResponse" + response.body().string());
-//            }
-//        });
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(getProcessReceiver);
+    }
+
+    private void initReceiver() {
+        getProcessReceiver = new GetProcessReceiver();
+        registerReceiver(getProcessReceiver, new IntentFilter("beijing_post_process_data"));
+    }
+
+    private void initProcessData() {
+        Intent intent = new Intent("shanghai_get_process_data");
+        //发送广播
+        sendBroadcast(intent);
+    }
+
 
     //发送网络请求数据
     private void initGetNetData() {
-
         mPresenter.getNetData("1");
-
-
-//        GetXiaoHuaTask task = new GetXiaoHuaTask();
-//        task.execute("desc", "1", "2");
-
-//        Object desc = new ShangHaiDetailHttpTask().getXiaoHuaList("desc", "1", "2");
-//        if(desc instanceof Response){
-//            Response response = (Response)desc;
-//            Log.e("initGetNetData", response.body().toString());
-//        }
-
-
-//        //1.可以隔离
-//        OkHttpClient client = new OkHttpClient();
-//        //2.可以隔离  1）构建url 2）构建参数
-//        HttpUrl.Builder builder = HttpUrl.parse("http://v.juhe.cn/joke/content/list.php").newBuilder();
-//        builder.addQueryParameter("sort", "desc");
-//        builder.addQueryParameter("page", "1");
-//        builder.addQueryParameter("pagesize", "2");
-//        //System.currentTimeMillis()  13位毫秒数
-//        builder.addQueryParameter("time", "" + System.currentTimeMillis()/1000);
-//        builder.addQueryParameter("key", "c3445bee630adef5e31bf1a0231b2efe");
-//        //3.可以隔离 构建request
-//        Request request = new Request.Builder().url(builder.build()).get().build();
-//        //4.可以隔离  构建call
-//        Call call = client.newCall(request);
-//        //异步请求
-//        //5.发送网络请求
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                Log.e("initGetNetData", "onFailure" + e);
-//            }
-//
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                Log.e("initGetNetData", "onResponse" + response.body().string());
-//            }
-//        });
     }
 
     private void initAnima() {
@@ -154,7 +98,7 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
 
             //延时加载
             //postponeEnterTransition();
-            //开启专场动画
+            //开启转场动画
             startPostponedEnterTransition();
         }
     }
@@ -173,6 +117,14 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     @Override
     public void showData(ShanghaiDetailBean data) {
 
+    }
+    private class GetProcessReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String processDec = intent.getStringExtra("processDec");
+            Log.e("ActivityOptionsCompat", "processDec = " + processDec);
+        }
     }
 
     @Override

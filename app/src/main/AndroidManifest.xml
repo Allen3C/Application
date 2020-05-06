@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".main.MainActivity"></activity>
-        <activity android:name=".main.shanghai.view.ShanghaiDetailActivity"></activity>
+        <activity
+            android:process=":shanghai.detail"
+            android:name=".main.shanghai.view.ShanghaiDetailActivity"/>
         <activity android:name=".splash.SplashActivity"
             android:theme="@style/FullScree">
             <intent-filter>
