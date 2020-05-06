@@ -2,9 +2,11 @@ package com.example.application.main.shanghai.view;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,7 +41,7 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     public static String mActivityOptionsCompat = "ActivityOptionsCompat";
     @BindView(R.id.iv_shanghai_detail)
     ImageView ivShanghaiDetail;
-    private GetProcessReceiver getProcessReceiver;
+//    private GetProcessReceiver getProcessReceiver;
 //    @BindView(R.id.glsurfaceview)
 //    GLSurfaceView glsurfaceview;
 
@@ -63,27 +65,33 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
 //            }
 //        });
         initAnima();
-        initReceiver();
-        initProcessData();
+//        initReceiver();
+//        initProcessData();
         initGetNetData();
+        initProviderData();
+    }
+
+    private void initProviderData() {
+        Uri insert = getContentResolver().insert(Uri.parse("content://com.news.today.process.data"), new ContentValues());
+        Log.e("ActivityOptionsCompat", "processDec = " + insert.toString());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(getProcessReceiver);
+//        unregisterReceiver(getProcessReceiver);
     }
 
-    private void initReceiver() {
-        getProcessReceiver = new GetProcessReceiver();
-        registerReceiver(getProcessReceiver, new IntentFilter("beijing_post_process_data"));
-    }
-
-    private void initProcessData() {
-        Intent intent = new Intent("shanghai_get_process_data");
-        //发送广播
-        sendBroadcast(intent);
-    }
+//    private void initReceiver() {
+//        getProcessReceiver = new GetProcessReceiver();
+//        registerReceiver(getProcessReceiver, new IntentFilter("beijing_post_process_data"));
+//    }
+//
+//    private void initProcessData() {
+//        Intent intent = new Intent("shanghai_get_process_data");
+//        //发送广播
+//        sendBroadcast(intent);
+//    }
 
 
     //发送网络请求数据
@@ -118,14 +126,14 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     public void showData(ShanghaiDetailBean data) {
 
     }
-    private class GetProcessReceiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String processDec = intent.getStringExtra("processDec");
-            Log.e("ActivityOptionsCompat", "processDec = " + processDec);
-        }
-    }
+//    private class GetProcessReceiver extends BroadcastReceiver{
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String processDec = intent.getStringExtra("processDec");
+//            Log.e("ActivityOptionsCompat", "processDec = " + processDec);
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:authorities="com.news.today.process.data"
+            android:name=".main.beijing.MainProcessDataProvider"/>
+
         <!--播放器配置信息-->
         <meta-data android:name="playertype"
             android:value="2" />

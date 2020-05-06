@@ -18,7 +18,7 @@ import butterknife.BindView;
 public class BeiJingFragment extends BaseFragment {
     @BindView(R.id.bt_play)
     Button btPlay;
-    private ProcessDataReceiver processDataReceiver;
+//    private ProcessDataReceiver processDataReceiver;
 
     @Override
     public void afterBindView() {
@@ -30,27 +30,27 @@ public class BeiJingFragment extends BaseFragment {
                 ShanghaiDetailActivity.start_5_0(getActivity(), btPlay);
             }
         });
-        processDataReceiver = new ProcessDataReceiver();
-        //注册广播 接受信息
-        getActivity().registerReceiver(processDataReceiver, new IntentFilter("shanghai_get_process_data"));
+//        processDataReceiver = new ProcessDataReceiver();
+//        //注册广播 接受信息
+//        getActivity().registerReceiver(processDataReceiver, new IntentFilter("shanghai_get_process_data"));
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         //广播注册之后就得反注册，防止内存泄漏
-        getActivity().unregisterReceiver(processDataReceiver);
+//        getActivity().unregisterReceiver(processDataReceiver);
     }
 
-    private class ProcessDataReceiver  extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            //接受信息
-            String processDec = ProcessDataTest.getInstance().getProcessDec();
-            Intent postIntent = new Intent("beijing_post_process_data");
-            postIntent.putExtra("processDec", processDec);
-            getActivity().sendBroadcast(postIntent);
-        }
-    }
+//    private class ProcessDataReceiver  extends BroadcastReceiver{
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            //接受信息
+//            String processDec = ProcessDataTest.getInstance().getProcessDec();
+//            Intent postIntent = new Intent("beijing_post_process_data");
+//            postIntent.putExtra("processDec", processDec);
+//            getActivity().sendBroadcast(postIntent);
+//        }
+//    }
 }
