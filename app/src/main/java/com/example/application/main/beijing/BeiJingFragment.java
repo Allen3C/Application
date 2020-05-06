@@ -22,6 +22,7 @@ public class BeiJingFragment extends BaseFragment {
 
     @Override
     public void afterBindView() {
+        mContext.startService(new Intent(mContext, MainProcessService.class));
         btPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +39,7 @@ public class BeiJingFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mContext.stopService(new Intent(mContext, MainProcessService.class));
         //广播注册之后就得反注册，防止内存泄漏
 //        getActivity().unregisterReceiver(processDataReceiver);
     }

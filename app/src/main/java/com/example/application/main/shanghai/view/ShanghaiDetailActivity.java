@@ -1,19 +1,28 @@
 package com.example.application.main.shanghai.view;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
@@ -22,6 +31,7 @@ import androidx.core.view.ViewCompat;
 import com.example.application.R;
 import com.example.application.base.BaseActivity;
 import com.example.application.base.ViewInject;
+import com.example.application.main.beijing.MainProcessService;
 import com.example.application.main.beijing.ProcessDataTest;
 import com.example.application.main.shanghai.If.IShanghaiDetailContract;
 import com.example.application.main.shanghai.dto.ShanghaiDetailBean;
@@ -44,7 +54,34 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
 //    private GetProcessReceiver getProcessReceiver;
 //    @BindView(R.id.glsurfaceview)
 //    GLSurfaceView glsurfaceview;
+    private ServiceConnection mConnection = new ServiceConnection() {
+    private Messenger messenger;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            Bundle data = msg.getData();
+            Log.e("ActivityOptionsCompat", "processDec = " + data.getString("process"));
+        }
+    };
+    private Messenger messengerClient = new Messenger(handler);
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        messenger = new Messenger(service);
+        Message message = new Message();
+        message.what = MainProcessService.SHANGHAI_DETAIL;
+        message.replyTo = messengerClient;
+        try {
+            messenger.send(message);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
+    }
+};
 
     @Override
     public void afterBindView() {
@@ -68,13 +105,19 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
 //        initReceiver();
 //        initProcessData();
         initGetNetData();
-        initProviderData();
+//        initProviderData();
+        initProcessService();
     }
 
-    private void initProviderData() {
-        Uri insert = getContentResolver().insert(Uri.parse("content://com.news.today.process.data"), new ContentValues());
-        Log.e("ActivityOptionsCompat", "processDec = " + insert.toString());
+    private void initProcessService() {
+        Intent intent = new Intent(this, MainProcessService.class);
+        bindService(intent, mConnection, Service.BIND_AUTO_CREATE);
     }
+
+//    private void initProviderData() {
+//        Uri insert = getContentResolver().insert(Uri.parse("content://com.news.today.process.data"), new ContentValues());
+//        Log.e("ActivityOptionsCompat", "processDec = " + insert.toString());
+//    }
 
     @Override
     protected void onDestroy() {
