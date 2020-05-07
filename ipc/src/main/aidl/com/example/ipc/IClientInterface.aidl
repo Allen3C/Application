@@ -5,4 +5,5 @@ package com.example.ipc;
 
 interface IClientInterface {
     void callBack(String requestKey, String resulstStr);
+//    void callBacks(String requestKey, Bundle bundle);
 }

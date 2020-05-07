@@ -80,18 +80,18 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     }
 
     private void initIpc() {
-        IpcRequest request = new IpcRequest("shanghai_detail");
-//        IpcManager.getInstance(this).excuteAsync(request, new CallBack() {
-//            @Override
-//            public void callBack(IResult iResult) {
-//                boolean success = iResult.isSuccess();
-//                String data = iResult.data();
-//                int code = iResult.getCode();
-//                Log.e("数据请求", success + "  " + code);
-//            }
-//        });
-        IResult result = IpcManager.getInstance(this).excuteSync(request);
-        Log.e("数据请求", result.data());
+        IpcRequest request = new IpcRequest("shanghaiDetail");
+        IpcManager.getInstance(this).excuteAsync(request, new CallBack() {
+            @Override
+            public void callBack(IResult iResult) {
+                boolean success = iResult.isSuccess();
+                String data = iResult.data();
+                int code = iResult.getCode();
+                Log.e("数据请求", success + "  " + code);
+            }
+        });
+//        IResult result = IpcManager.getInstance(this).excuteSync(request);
+//        Log.e("数据请求", result.data());
     }
 
 
