@@ -36,6 +36,10 @@ import com.example.application.main.beijing.ProcessDataTest;
 import com.example.application.main.shanghai.If.IShanghaiDetailContract;
 import com.example.application.main.shanghai.dto.ShanghaiDetailBean;
 import com.example.application.main.shanghai.presenter.ShanghaiDetailPresenter;
+import com.example.ipc.CallBack;
+import com.example.ipc.IpcManager;
+import com.example.ipc.request.IpcRequest;
+import com.example.ipc.result.IResult;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -51,37 +55,6 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     public static String mActivityOptionsCompat = "ActivityOptionsCompat";
     @BindView(R.id.iv_shanghai_detail)
     ImageView ivShanghaiDetail;
-//    private GetProcessReceiver getProcessReceiver;
-//    @BindView(R.id.glsurfaceview)
-//    GLSurfaceView glsurfaceview;
-    private ServiceConnection mConnection = new ServiceConnection() {
-    private Messenger messenger;
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            Bundle data = msg.getData();
-            Log.e("ActivityOptionsCompat", "processDec = " + data.getString("process"));
-        }
-    };
-    private Messenger messengerClient = new Messenger(handler);
-    @Override
-    public void onServiceConnected(ComponentName name, IBinder service) {
-        messenger = new Messenger(service);
-        Message message = new Message();
-        message.what = MainProcessService.SHANGHAI_DETAIL;
-        message.replyTo = messengerClient;
-        try {
-            messenger.send(message);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onServiceDisconnected(ComponentName name) {
-
-    }
-};
 
     @Override
     public void afterBindView() {
@@ -102,39 +75,24 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
 //            }
 //        });
         initAnima();
-//        initReceiver();
-//        initProcessData();
         initGetNetData();
-//        initProviderData();
-        initProcessService();
+        initIpc();
     }
 
-    private void initProcessService() {
-        Intent intent = new Intent(this, MainProcessService.class);
-        bindService(intent, mConnection, Service.BIND_AUTO_CREATE);
+    private void initIpc() {
+        IpcRequest request = new IpcRequest("shanghai_detail");
+//        IpcManager.getInstance(this).excuteAsync(request, new CallBack() {
+//            @Override
+//            public void callBack(IResult iResult) {
+//                boolean success = iResult.isSuccess();
+//                String data = iResult.data();
+//                int code = iResult.getCode();
+//                Log.e("数据请求", success + "  " + code);
+//            }
+//        });
+        IResult result = IpcManager.getInstance(this).excuteSync(request);
+        Log.e("数据请求", result.data());
     }
-
-//    private void initProviderData() {
-//        Uri insert = getContentResolver().insert(Uri.parse("content://com.news.today.process.data"), new ContentValues());
-//        Log.e("ActivityOptionsCompat", "processDec = " + insert.toString());
-//    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        unregisterReceiver(getProcessReceiver);
-    }
-
-//    private void initReceiver() {
-//        getProcessReceiver = new GetProcessReceiver();
-//        registerReceiver(getProcessReceiver, new IntentFilter("beijing_post_process_data"));
-//    }
-//
-//    private void initProcessData() {
-//        Intent intent = new Intent("shanghai_get_process_data");
-//        //发送广播
-//        sendBroadcast(intent);
-//    }
 
 
     //发送网络请求数据
@@ -169,14 +127,6 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     public void showData(ShanghaiDetailBean data) {
 
     }
-//    private class GetProcessReceiver extends BroadcastReceiver{
-//
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            String processDec = intent.getStringExtra("processDec");
-//            Log.e("ActivityOptionsCompat", "processDec = " + processDec);
-//        }
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
