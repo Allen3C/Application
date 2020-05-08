@@ -69,6 +69,9 @@ dependencies {
     //lottie
     implementation "com.airbnb.android:lottie:2.2.5"
 
+    //j2v8
+    implementation 'com.eclipsesource.j2v8:j2v8:5.0.103@aar'
+
     //opengl ndk
     api files('libs/opengl.jar')
 }

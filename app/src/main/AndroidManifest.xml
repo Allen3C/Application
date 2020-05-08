@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".main.MainActivity"></activity>
+        <activity android:name=".main.shenzhen.view.OpenGlActivity" />
+        <activity android:name=".main.shenzhen.view.WebViewActivity" />
+        <activity android:name=".main.shenzhen.view.WeiXinActivity" />
         <activity
             android:process=":shanghai.detail"
             android:name=".main.shanghai.view.ShanghaiDetailActivity"/>
