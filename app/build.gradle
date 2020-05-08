@@ -26,6 +26,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    sourceSets{
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -64,4 +69,6 @@ dependencies {
     //lottie
     implementation "com.airbnb.android:lottie:2.2.5"
 
+    //opengl ndk
+    api files('libs/opengl.jar')
 }

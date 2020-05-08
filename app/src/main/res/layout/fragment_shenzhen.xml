@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <android.opengl.GLSurfaceView
+        android:id="@+id/gl_surfce_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/str_main_shenzhen"/>
+        android:layout_gravity="center" />
 
 </LinearLayout>

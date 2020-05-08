@@ -58,22 +58,6 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
 
     @Override
     public void afterBindView() {
-//        glsurfaceview.setRenderer(new GLSurfaceView.Renderer() {
-//            @Override
-//            public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-//                //都是子线程回调
-//            }
-//
-//            @Override
-//            public void onSurfaceChanged(GL10 gl, int width, int height) {
-//
-//            }
-//
-//            @Override
-//            public void onDrawFrame(GL10 gl) {
-//                //循环调用  进行渲染
-//            }
-//        });
         initAnima();
         initGetNetData();
         initIpc();
