@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * 默认的下拉刷新头部
+ */
 public class DefaultRefreshManager extends BaseRefreshManager {
     private TextView mTvRefresh;
 

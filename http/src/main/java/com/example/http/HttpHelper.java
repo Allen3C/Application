@@ -25,7 +25,9 @@ public class HttpHelper {
     // TODO: 20-4-21
     protected static <T> IResult<T> execute(IRequest request, Map<String, Object> params) {
         request.setParams(params);
+        //构建call
         ICall call = getHttpScheduler().newCall(request);
+        //请求网络
         return getHttpScheduler().execute(call);
     }
 }

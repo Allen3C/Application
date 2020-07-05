@@ -10,7 +10,9 @@ import com.example.application.main.shanghai.module.ShangHaiDetailHttpTask;
 import com.example.http.result.IResult;
 import com.google.gson.Gson;
 
-
+/**
+ * p层 请求网络
+ */
 public class ShanghaiDetailPresenter extends BasePresenter<IShanghaiDetailContract.Iview> implements IShanghaiDetailContract.IPresenter {
     public ShanghaiDetailPresenter(IShanghaiDetailContract.Iview view) {
         super(view);
@@ -50,15 +52,38 @@ public class ShanghaiDetailPresenter extends BasePresenter<IShanghaiDetailContra
         //2.合理利用抽象编程
         //3.合理利用泛型传递数据
         //4.合理利用一些设计模式
+
+
+
+
+
+        /**
+         * 这是task模块的功能
+         * 执行异步任务（http模块的网络请求）
+         */
         submitTask(new JHTask<ShanghaiDetailBean>() {
 
+            /**
+             * 运行在子线程  执行网络请求
+             * AsyncTaskInstance这个类里实现将这个方法运行在子线程
+             * @return
+             */
             @Override
             public IResult<ShanghaiDetailBean> onBackground() {
+                //这是http模块的功能
+                //执行网络请求并返回结果 返回的结果作为onComplete的参数，也就是下边onSuccess的参数
                 return new ShangHaiDetailHttpTask<ShanghaiDetailBean>().getXiaoHuaList("desc", "1", pagesize + "");
             }
 
+
+            /**
+             * 运行在主线程  表示请求成功
+             * AsyncTaskInstance这个类里实现将这个方法运行在主线程
+             * @param t
+             */
             @Override
             public void onSuccess(IResult<ShanghaiDetailBean> t) {
+                //t是Result  t.data()是Result里边的JavaBean，也就是网络返回的数据
                 ShanghaiDetailBean data = t.data();
 //                //仅限演示
 //                Gson gson = new Gson();

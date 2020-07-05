@@ -8,12 +8,18 @@ import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
 
-//单例类
+/**
+ * 默认解析器 单例类
+ * 用三方库Gson解析
+ */
 public class DefaultResultParser implements IParser {
 
     private static DefaultResultParser mInstance;
     private final Gson mGson;
 
+    /**
+     * 默认解析器用Gson  单例
+     */
     private DefaultResultParser(){
         mGson = new Gson();
 

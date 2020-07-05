@@ -7,6 +7,9 @@ import com.example.http.request.host.IHost;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+/**
+ * 包括 host path params  请求方法
+ */
 public class LfRequest implements IRequest {
 
     protected String path;

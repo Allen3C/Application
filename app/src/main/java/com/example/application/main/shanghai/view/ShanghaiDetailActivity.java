@@ -47,7 +47,9 @@ import javax.microedition.khronos.opengles.GL10;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
+/**
+ * v层
+ */
 @ViewInject(mainlayoutid = R.layout.acrivity_shanghai_detail)
 public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDetailContract.Iview {
     IShanghaiDetailContract.IPresenter mPresenter = new ShanghaiDetailPresenter(this);

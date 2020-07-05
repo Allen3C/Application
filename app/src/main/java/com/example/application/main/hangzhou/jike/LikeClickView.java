@@ -27,7 +27,7 @@ public class LikeClickView extends View {
     private Paint bitmPaint;
     private int left;
     private int top;
-        private float handScale = 1.0f;
+    private float handScale = 1.0f;
     private float centerX;
     private float centerY;
 

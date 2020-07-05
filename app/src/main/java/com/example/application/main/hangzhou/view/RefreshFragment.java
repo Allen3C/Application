@@ -60,6 +60,7 @@ public class RefreshFragment extends BaseFragment implements IShanghaiDetailCont
             ZhiHuAdapter adapter = new ZhiHuAdapter(data.result.data);
             refreshRecyclerview.setAdapter(adapter);
         }
+        //数据请求成功，隐藏下拉刷新头部
         godRefresh.refreshOver();
     }
 }

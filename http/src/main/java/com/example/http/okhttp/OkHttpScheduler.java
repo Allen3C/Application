@@ -13,6 +13,12 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
+/**
+ * （封装了okhttp的代码）
+ * 构建自定义的call
+ * 封装思想是：把自定义的request转换为okhttp的request，然后用okhttp的代码client.newcall(request)构建出
+ * okhttp的call，再通过OkHttpCall类将okhttp的call转换为自定义的call
+ */
 public class OkHttpScheduler extends HttpScheduler {
     private OkHttpClient client;
 

@@ -11,6 +11,10 @@ import com.example.task.LfTask;
 public abstract class JHTask<T> extends LfTask<IResult<T>> implements IResultCallBack<T> {
 
 
+    /**
+     * 运行在主线程
+     * @param iResult
+     */
     @Override
     public void onComplete(IResult<T> iResult) {
 
@@ -25,6 +29,10 @@ public abstract class JHTask<T> extends LfTask<IResult<T>> implements IResultCal
         }
     }
 
+    /**
+     * 运行在主线程
+     * @param t
+     */
     @Override
     public void onFailed(IResult t) {
         switch (t.getCode()){

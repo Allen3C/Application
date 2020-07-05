@@ -13,7 +13,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-
+/**
+ * 线程池管理类
+ */
 public class TaskScheduler {
     private final PriorityThreadPoolExecutor executor;
 
@@ -38,6 +40,7 @@ public class TaskScheduler {
             public boolean handleMessage(@NonNull Message msg) {
                 switch (msg.what){
                     case ITaskSchedulerType.SUBMIT_TASK:
+                        //向线程池提交任务
                         doSubmitTask((AsyncTaskInstance) msg.obj);
                         break;
                 }
@@ -57,6 +60,10 @@ public class TaskScheduler {
     }
 
 
+    /**
+     * 向线程池提交任务
+     * @param taskInstance
+     */
     private void doSubmitTask(AsyncTaskInstance taskInstance) {
         executor.submit(taskInstance);
     }
@@ -69,7 +76,7 @@ public class TaskScheduler {
     }
 
     public void submit(AsyncTaskInstance instance) {
-        //主线程给子线程发消息
+        //主线程给子线程发消息  发送的消息是instance，也就是外面传进来的FutureTask
         handler.sendMessage(handler.obtainMessage(ITaskSchedulerType.SUBMIT_TASK, instance));
 
     }

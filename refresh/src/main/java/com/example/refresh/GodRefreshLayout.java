@@ -14,6 +14,10 @@ import android.widget.ScrollView;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * 下拉刷新框架，是一个ViewGroup，里面最上面是下拉刷新View（可以使用默认的，可以自定义）
+ * 里面的下边就根据项目添加控件
+ */
 public class GodRefreshLayout extends LinearLayout {
     private BaseRefreshManager mRefreshManager;
     private Context mContext;
@@ -47,6 +51,7 @@ public class GodRefreshLayout extends LinearLayout {
         mContext = context;
     }
 
+    //添加下拉刷新View
     //开启下拉刷新 下拉刷新布局的效果 是默认的
     public void setRefreshManager(){
         mRefreshManager = new DefaultRefreshManager(mContext);

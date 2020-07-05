@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
+/**
+ * 下拉刷新头部基类
+ */
 public abstract class BaseRefreshManager {
     public LayoutInflater mLayoutInflater;
 

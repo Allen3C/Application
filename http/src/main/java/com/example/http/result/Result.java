@@ -1,6 +1,10 @@
 package com.example.http.result;
 
-
+/**
+ * 最终返回的结果类型
+ * 包括网络请求回来的数据、成功或失败状态以及失败的状态码
+ * @param <T>
+ */
 public class Result<T> implements IResult<T> {
 
     public final static int CODE_200 = 200;
